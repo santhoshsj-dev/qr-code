@@ -121,10 +121,10 @@ const BulkGenerator: React.FC = () => {
 
       {/* Info and primary CTA */}
       <div className="flex items-center justify-between gap-3">
-        <div className="text-[11px] text-slate-400">
+        <div className="text-[11px] text-muted">
           {fileName ? (
             <>
-              <span className="font-medium text-slate-200">{fileName}</span>{" "}
+              <span className="font-medium text-muted-foreground">{fileName}</span>{" "}
               · {rowCount} rows detected (soft limit ~1000 recommended).
             </>
           ) : (
@@ -134,7 +134,7 @@ const BulkGenerator: React.FC = () => {
         <button
           disabled={status === "running" || !fileName}
           onClick={handleStart}
-          className="inline-flex items-center rounded bg-primary px-3 py-1.5 text-[11px] font-medium text-primary-foreground disabled:cursor-not-allowed disabled:bg-slate-700"
+          className="inline-flex items-center rounded bg-primary px-3 py-1.5 text-[11px] font-medium text-primary-foreground disabled:cursor-not-allowed disabled:opacity-60"
         >
           {status === "running" ? "Generating…" : "Generate QRs"}
         </button>

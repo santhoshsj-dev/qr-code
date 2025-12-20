@@ -8,7 +8,7 @@ import Footer from "./Footer";
 // Wraps a max-width container and responsive grid (page-specific).
 const PageLayout: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-50">
+    <div className="min-h-screen flex flex-col">
       {/* Sticky header with logo + tagline */}
       <Header />
 

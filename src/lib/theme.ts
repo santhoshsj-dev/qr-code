@@ -73,10 +73,5 @@ export function useTheme(): [ThemeChoice, () => ThemeChoice] {
     return next;
   };
 
-  // initialize document to current theme on first client render
-  useEffect(() => {
-    applyTheme(theme);
-  }, []);
-
   return [theme, toggle];
 }

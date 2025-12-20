@@ -8,7 +8,7 @@ const About: React.FC = () => {
 
       <section className="mb-4 space-y-1">
         <h2 className="text-sm font-semibold">Static architecture</h2>
-        <p className="text-[11px] text-slate-300">
+        <p className="text-[11px] text-muted">
           This tool is a static React app built with Vite and TypeScript, hosted
           on a CDN with no backend or database.[web:1][web:4]
         </p>
@@ -16,7 +16,7 @@ const About: React.FC = () => {
 
       <section className="mb-4 space-y-1">
         <h2 className="text-sm font-semibold">Privacy first</h2>
-        <p className="text-[11px] text-slate-300">
+        <p className="text-[11px] text-muted">
           Every QR is generated directly in your browser. There are no logins,
           analytics beacons, or scan tracking.
         </p>
@@ -24,7 +24,7 @@ const About: React.FC = () => {
 
       <section className="space-y-1">
         <h2 className="text-sm font-semibold">Open tooling</h2>
-        <p className="text-[11px] text-slate-300">
+        <p className="text-[11px] text-muted">
           The app uses open libraries for QR styling, CSV parsing, and ZIP
           creation, all running client‑side.[web:13][web:19][web:26]
         </p>

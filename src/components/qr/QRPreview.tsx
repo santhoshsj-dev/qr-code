@@ -26,12 +26,11 @@ function buildData(settings: QRSettings) {
     }
     case "phone": {
       const phoneVal = (data.phone || "").trim();
-      const numOnly = phoneVal.replace(/\D/g, "");
-      if (!numOnly) return "";
+      if (!phoneVal) return "";
       // If user typed full E.164 number (starts with +), use it directly
       if (phoneVal.startsWith("+")) return `tel:${phoneVal}`;
-      const cc = data.phoneCountry || "";
-      return `tel:${cc}${numOnly}`;
+      // otherwise pass the raw value (digits/spaces allowed)
+      return `tel:${phoneVal.replace(/\s+/g, "")}`;
     }
     case "whatsapp": {
       const phoneVal = (data.phone || "").trim();
@@ -41,9 +40,8 @@ function buildData(settings: QRSettings) {
       if (phoneVal.startsWith("+")) {
         full = phoneVal.replace(/\D/g, "").replace(/^0+/, "");
       } else {
-        const cc = (data.waCountry || "").replace(/\D/g, "");
-        const phone = phoneVal.replace(/\D/g, "");
-        full = `${cc}${phone}`.replace(/^0+/, "");
+        // no country code stored — assume user entered local or international number
+        full = phoneVal.replace(/\D/g, "").replace(/^0+/, "");
       }
       return full ? `https://wa.me/${full}${msg}` : "";
     }
@@ -127,8 +125,8 @@ const QRPreview: React.FC<QRPreviewProps> = ({ settings, isEmpty, qrInstanceRef 
         margin: computedMargin,
         image: style?.image || undefined,
         imageOptions: { crossOrigin: "anonymous", margin: imgMargin },
-        dotsOptions: { color: style?.dotsColor || "#e2e8f0", type: style?.dotsType || "rounded" },
-        backgroundOptions: { color: style?.backgroundColor || "#0f172a" },
+        dotsOptions: { color: style?.dotsColor || "#000000", type: style?.dotsType || "rounded" },
+        backgroundOptions: { color: style?.backgroundColor || "#ffffff" },
         cornersSquareOptions: { type: cornersType },
         cornersDotOptions: { type: eyeType },
       });
@@ -148,8 +146,8 @@ const QRPreview: React.FC<QRPreviewProps> = ({ settings, isEmpty, qrInstanceRef 
             width: size,
             height: size,
             margin: settings.style?.margin ?? 10,
-            dotsOptions: { color: settings.style?.dotsColor || "#e2e8f0", type: settings.style?.dotsType || "rounded" },
-            backgroundOptions: { color: settings.style?.backgroundColor || "#0f172a" },
+          dotsOptions: { color: settings.style?.dotsColor || "#000000", type: settings.style?.dotsType || "rounded" },
+          backgroundOptions: { color: settings.style?.backgroundColor || "#ffffff" },
             image: settings.style?.image || undefined,
             imageOptions: { crossOrigin: "anonymous", margin: imgMargin },
             cornersSquareOptions: { type: cornersType },
@@ -178,27 +176,27 @@ const QRPreview: React.FC<QRPreviewProps> = ({ settings, isEmpty, qrInstanceRef 
       <div className="flex items-center justify-between mb-2">
         <div>
           <h2 className="text-xs font-semibold text-foreground">Live preview</h2>
-          <p className="text-[10px] text-slate-500">
+          <p className="text-[10px] text-muted">
             Static QR · {settings.size}px · {settings.format.toUpperCase()}
           </p>
         </div>
         {/* Subtle "static" label */}
-        <span className="rounded-full border border-emerald-500/50 bg-emerald-500/10 px-2 py-0.5 text-[10px] text-emerald-300">
+        <span className="rounded-full badge-success px-2 py-0.5 text-[10px]">
           static
         </span>
       </div>
 
       {/* Checkerboard background & QR container */}
-      <div className="relative mt-2 flex items-center justify-center rounded-md bg-[linear-gradient(45deg,#1e293b_25%,transparent_25%),linear-gradient(-45deg,#1e293b_25%,transparent_25%),linear-gradient(45deg,transparent_75%,#1e293b_75%),linear-gradient(-45deg,transparent_75%,#1e293b_75%)] bg-[length:12px_12px] bg-[position:0_0,0_6px,6px_-6px,-6px_0] p-4">
+      <div className="relative mt-2 flex items-center justify-center rounded-md bg-[linear-gradient(45deg,var(--color-popover)_25%,transparent_25%),linear-gradient(-45deg,var(--color-popover)_25%,transparent_25%),linear-gradient(45deg,transparent_75%,var(--color-popover)_75%),linear-gradient(-45deg,transparent_75%,var(--color-popover)_75%)] bg-size-[12px_12px] bg-position-[0_0,0_6px,6px_-6px,-6px_0] p-4">
         <div
-          className="flex items-center justify-center rounded bg-slate-900 shadow-lg"
+          className="flex items-center justify-center rounded card shadow-lg"
           style={{
             width: Math.min(settings.size, 320),
             height: Math.min(settings.size, 320),
           }}
         >
           {isEmpty ? (
-            <span className="text-[10px] text-slate-500 px-4 text-center">
+            <span className="text-[10px] text-muted px-4 text-center">
               Enter content on the left to see your QR code here.
             </span>
           ) : (

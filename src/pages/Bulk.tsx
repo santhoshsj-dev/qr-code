@@ -8,7 +8,7 @@ const Bulk: React.FC = () => {
       <h1 className="text-lg font-semibold tracking-tight mb-1">
         Bulk QR Generator
       </h1>
-      <p className="text-xs text-slate-400 mb-4">
+      <p className="text-xs text-muted mb-4">
         Upload a CSV and generate multiple static QR codes on your device. Large
         files may use significant CPU and memory.
       </p>

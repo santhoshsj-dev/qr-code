@@ -8,7 +8,7 @@ const Help: React.FC = () => {
 
       <section className="mb-4 space-y-1">
         <h2 className="text-sm font-semibold">How to create a QR</h2>
-        <p className="text-[11px] text-slate-300">
+        <p className="text-[11px] text-muted">
           Choose a QR type, fill in the fields, customize colors and size, then
           click “Download QR”.
         </p>
@@ -16,7 +16,7 @@ const Help: React.FC = () => {
 
       <section className="mb-4 space-y-1">
         <h2 className="text-sm font-semibold">What data is stored?</h2>
-        <p className="text-[11px] text-slate-300">
+        <p className="text-[11px] text-muted">
           No QR content or files ever leave your device. There is no server,
           account, or tracking.
         </p>
@@ -24,7 +24,7 @@ const Help: React.FC = () => {
 
       <section className="space-y-1">
         <h2 className="text-sm font-semibold">Bulk CSV format</h2>
-        <p className="text-[11px] text-slate-300">
+        <p className="text-[11px] text-muted">
           Use one row per QR with columns like type, value, and any extra
           fields such as email or phone, depending on the QR template.
         </p>

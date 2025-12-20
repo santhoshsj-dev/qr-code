@@ -15,7 +15,7 @@ const BulkWarning: React.FC<BulkWarningProps> = ({
   onConfirm,
 }) => {
   return (
-    <div className="rounded-lg border border-amber-500/60 bg-amber-950/40 p-3 text-[11px] text-amber-100">
+    <div className="alert-warning text-[11px] rounded-lg p-3">
       <p className="font-medium mb-1">Heads up: bulk generation is intensive.</p>
       <ul className="mb-2 list-disc pl-4 space-y-1">
         <li>All QR codes are generated on your device.</li>
@@ -26,13 +26,13 @@ const BulkWarning: React.FC<BulkWarningProps> = ({
       <div className="flex items-center justify-end gap-2">
         <button
           onClick={onCancel}
-          className="rounded border border-amber-500/40 px-2.5 py-1 text-[11px]"
+          className="rounded border border-input px-2.5 py-1 text-[11px] text-muted-foreground"
         >
           Cancel
         </button>
         <button
           onClick={onConfirm}
-          className="rounded bg-amber-400 px-2.5 py-1 text-[11px] font-semibold text-slate-950"
+          className="rounded btn-warning px-2.5 py-1 text-[11px] font-semibold"
         >
           Continue ({rowCount} rows)
         </button>

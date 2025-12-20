@@ -33,7 +33,7 @@ const QRTypeSelector: React.FC<QRTypeSelectorProps> = ({ value, onChange }) => {
                 "rounded px-2.5 py-1",
                 active
                   ? "bg-primary text-primary-foreground"
-                  : "bg-transparent text-slate-200 hover:bg-slate-800",
+                  : "bg-transparent text-muted-foreground hover:opacity-90",
               ].join(" ")}
             >
               {tab.label}

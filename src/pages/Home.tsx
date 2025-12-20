@@ -45,8 +45,8 @@ const Home: React.FC = () => {
     size: 512,
     format: "png",
     style: {
-      dotsColor: "#e2e8f0",
-      backgroundColor: "#0f172a",
+      dotsColor: "#000000",
+      backgroundColor: "#ffffff",
       dotsType: "rounded",
       image: null,
       imageSize: 20,
@@ -160,7 +160,7 @@ const Home: React.FC = () => {
           <h1 className="text-lg font-semibold tracking-tight">
             Static QR Generator
           </h1>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-muted">
             Create fully static, privacy‑friendly QR codes with custom colors,
             logos and more.
           </p>

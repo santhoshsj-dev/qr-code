@@ -35,9 +35,9 @@ const Field: React.FC<FieldProps> = ({
 }) => {
   return (
     <div className="space-y-1">
-      <label className="flex items-center justify-between text-[11px] text-slate-200">
+      <label className="flex items-center justify-between text-[11px] text-muted-foreground">
         <span>{label}</span>
-        {required && <span className="text-[10px] text-red-400">Required</span>}
+        {required && <span className="text-[10px] text-destructive">Required</span>}
       </label>
       <input
         type={type}
@@ -48,7 +48,7 @@ const Field: React.FC<FieldProps> = ({
         className="w-full input px-2 py-1 text-[11px] placeholder:text-muted focus:outline-none"
       />
       {helper && (
-        <p className="text-[10px] text-slate-500">{helper}</p>
+        <p className="text-[10px] text-muted">{helper}</p>
       )}
     </div>
   );
@@ -119,7 +119,7 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
           type="url"
           onChange={handleFieldChange}
         />
-        {errors.url && <p className="text-[10px] text-red-400">{errors.url}</p>}
+        {errors.url && <p className="text-[10px] text-destructive">{errors.url}</p>}
       </div>
     );
   }
@@ -127,7 +127,7 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
   if (type === "text") {
     return (
       <div className="space-y-2">
-        <label className="text-[11px] text-slate-200">Text content</label>
+        <label className="text-[11px] text-muted-foreground">Text content</label>
         <textarea
           name="text"
           value={data.text || ""}
@@ -136,7 +136,7 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
           rows={4}
           className="w-full resize-y input text-[11px] placeholder:text-muted-foreground focus:outline-none"
         />
-        <p className="text-[10px] text-slate-500">
+        <p className="text-[10px] text-muted">
           The QR will encode exactly this text.
         </p>
       </div>
@@ -155,7 +155,7 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
           type="email"
           onChange={handleFieldChange}
         />
-        {errors.email && <p className="text-[10px] text-red-400">{errors.email}</p>}
+        {errors.email && <p className="text-[10px] text-destructive">{errors.email}</p>}
         <Field
           label="Subject"
           name="subject"
@@ -164,7 +164,7 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
           onChange={onChangeField}
         />
         <div className="space-y-1">
-          <label className="text-[11px] text-slate-200">
+          <label className="text-[11px] text-muted-foreground">
             Message body
           </label>
           <textarea
@@ -186,11 +186,10 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
         <PhoneInput
           value={data.phone}
           onChange={(e) => handleFieldChange("phone", e.target.value)}
-          onCountryChange={(c) => onChangeField("phoneCountry", c?.countryCallingCodes?.[0] ?? "")}
           placeholder="Enter phone number"
         />
-        {errors.phone && <p className="text-[10px] text-red-400">{errors.phone}</p>}
-      </div>
+        {errors.phone && <p className="text-[10px] text-destructive">{errors.phone}</p>
+  }</div>
     );
   }
 
@@ -248,12 +247,11 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
         <PhoneInput
           value={data.phone}
           onChange={(e) => handleFieldChange("phone", e.target.value)}
-          onCountryChange={(c) => onChangeField("waCountry", c?.countryCallingCodes?.[0] ?? "")}
           placeholder="Enter WhatsApp number"
         />
-        {errors.phone && <p className="text-[10px] text-red-400">{errors.phone}</p>}
+        {errors.phone && <p className="text-[10px] text-destructive">{errors.phone}</p>}
         <div className="space-y-1">
-          <label className="text-[11px] text-slate-200">Prefilled message</label>
+          <label className="text-[11px] text-muted-foreground">Prefilled message</label>
           <textarea
             name="message"
             value={data.message || ""}
@@ -281,7 +279,7 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
     return (
       <div className="space-y-3">
         <div className="space-y-1">
-          <label className="text-[11px] text-slate-200">
+          <label className="text-[11px] text-muted-foreground">
             Social platform
           </label>
           <div className="flex flex-wrap gap-1">
@@ -296,7 +294,7 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
                     "rounded px-2.5 py-1 text-[11px]",
                     active
                       ? "bg-primary text-primary-foreground"
-                      : "panel text-card-foreground hover:opacity-90",
+                      : "panel hover:opacity-90",
                   ].join(" ")}
                 >
                   {p.label}

@@ -187,14 +187,14 @@ const QRDownload: React.FC<QRDownloadProps> = ({
     <div className="panel text-[11px]">
       <div className="mb-2 flex items-center justify-between">
         <span className="font-semibold text-foreground">Download</span>
-        <span className="text-[10px] text-slate-500">
+        <span className="text-[10px] text-muted">
           {settings.size}px · {settings.format.toUpperCase()}
         </span>
       </div>
 
       {/* Filename */}
       <div className="mb-3">
-        <label className="mb-1 block text-[10px] text-slate-400">Filename</label>
+        <label className="mb-1 block text-[10px] text-muted">Filename</label>
         <input
           type="text"
           value={fileNameInput}
@@ -217,7 +217,7 @@ const QRDownload: React.FC<QRDownloadProps> = ({
                 "flex-1 rounded px-2 py-1 text-center",
                 active
                   ? "bg-primary text-primary-foreground"
-                  : "bg-slate-800 text-slate-200 hover:bg-slate-700",
+                  : "btn-secondary hover:opacity-90",
               ].join(" ")}
             >
               {fmt.toUpperCase()}
@@ -231,13 +231,13 @@ const QRDownload: React.FC<QRDownloadProps> = ({
         type="button"
         disabled={disabled}
         onClick={handleDownload}
-        className="mb-2 inline-flex w-full items-center justify-center rounded bg-primary px-3 py-1.5 text-[11px] font-semibold text-primary-foreground disabled:cursor-not-allowed disabled:bg-slate-700"
+        className="mb-2 inline-flex w-full items-center justify-center rounded bg-primary px-3 py-1.5 text-[11px] font-semibold text-primary-foreground disabled:cursor-not-allowed disabled:opacity-60"
       >
         Download QR
       </button>
 
       {/* Secondary hints */}
-      <ul className="space-y-1 text-[10px] text-slate-500">
+      <ul className="space-y-1 text-[10px] text-muted">
         <li>Tip: You can also right‑click the QR preview and “Save image as”.</li>
         <li>Drag‑to‑save works in most desktop browsers.</li>
       </ul>

@@ -30,7 +30,7 @@ const BulkUpload: React.FC<BulkUploadProps> = ({ onFileParsed }) => {
 
   return (
     <div className="rounded border border-dashed panel p-4 text-center">
-      <p className="mb-2 text-[11px] text-slate-300">
+      <p className="mb-2 text-[11px] text-muted">
         Drag & drop a CSV file here, or click to browse.
       </p>
       <input
