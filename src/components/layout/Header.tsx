@@ -1,18 +1,10 @@
 // src/components/layout/Header.tsx
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ThemeToggle from "../ui/ThemeToggle";
 
-// Simple sticky header with app title and optional reset.
+// Simple sticky header with app title.
 const Header: React.FC = () => {
-  const location = useLocation();
-
-  const handleReset = () => {
-    // For now a simple full-page reload.
-    // Later you can wire this to clear context / state only.
-    window.location.reload();
-  };
-
   return (
     <header className="site-header sticky top-0 z-20">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
@@ -31,62 +23,26 @@ const Header: React.FC = () => {
           </Link>
         </div>
 
-        {/* Center: nav (optional) */}
-        <nav className="hidden md:flex items-center gap-4 text-xs">
-          <Link
-            to="/"
-            className={
-              location.pathname === "/"
-                ? "text-primary"
-                : "text-muted-foreground hover:text-foreground"
-            }
-          >
-            Generator
-          </Link>
-          <Link
-            to="/bulk"
-            className={
-              location.pathname.startsWith("/bulk")
-                ? "text-primary"
-                : "text-muted-foreground hover:text-foreground"
-            }
-          >
-            Bulk
-          </Link>
-          <Link
-            to="/help"
-            className={
-              location.pathname.startsWith("/help")
-                ? "text-primary"
-                : "text-muted-foreground hover:text-foreground"
-            }
-          >
-            Help
-          </Link>
-          <Link
-            to="/about"
-            className={
-              location.pathname.startsWith("/about")
-                ? "text-primary"
-                : "text-muted-foreground hover:text-foreground"
-            }
-          >
-            About
-          </Link>
-        </nav>
-
-        {/* Right: Reset + privacy tooltip icon */}
+        {/* Right: GitHub star + theme toggle + privacy tooltip icon */}
         <div className="flex items-center gap-2">
+          <a
+            href="https://github.com/santhoshsj-dev/qr-code"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1 rounded btn-ghost text-[11px]"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.9 6.1 20.5 7.3 14 2.5 9.4l6.6-.9L12 2.5z"
+              />
+            </svg>
+            Star on GitHub
+          </a>
+
           <ThemeToggle />
 
-          <button
-            onClick={handleReset}
-            className="hidden sm:inline-flex btn-ghost"
-          >
-            Reset
-          </button>
-
-          {/* Privacy tooltip – later replace with a real tooltip component */}
+          {/* Privacy tooltip - later replace with a real tooltip component */}
           <div className="relative group">
             <button
               aria-label="Privacy info"

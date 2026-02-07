@@ -91,6 +91,13 @@ const BulkGenerator: React.FC = () => {
       if (blob) zip.file(`${safeName}.png`, blob);
 
       // cleanup
+      try {
+        if (typeof inst.destroy === "function") {
+          inst.destroy();
+        }
+      } catch {
+        // ignore destroy errors
+      }
       document.body.removeChild(container);
 
       setProgress({ current: i + 1, total });

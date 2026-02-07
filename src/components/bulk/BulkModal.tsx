@@ -7,7 +7,6 @@ interface BulkModalProps {
 }
 
 // Simple full-screen overlay modal for bulk generation.
-// Reuses the same BulkGenerator organism as the dedicated /bulk page.
 const BulkModal: React.FC<BulkModalProps> = ({ onClose }) => {
   return (
     <div className="fixed inset-0 z-30 flex items-center justify-center overlay">

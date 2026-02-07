@@ -1,5 +1,5 @@
 // src/components/qr/QRCustomizer.tsx
-import React, { useState } from "react";
+import React from "react";
 
 interface QRCustomizerProps {
   size: number;
@@ -18,7 +18,7 @@ interface QRCustomizerProps {
   onStyleChange?: (key: string, value: unknown) => void;
 }
 
-// Collapsible customization panel:
+// Customization panel:
 // 1) Colors, 2) Logo, 3) Shape styling, 4) Size.
 const QRCustomizer: React.FC<QRCustomizerProps> = ({
   size,
@@ -26,23 +26,14 @@ const QRCustomizer: React.FC<QRCustomizerProps> = ({
   style,
   onStyleChange,
 }) => {
-  const [openColors, setOpenColors] = useState(true);
-  const [openLogo, setOpenLogo] = useState(false);
-  const [openShape, setOpenShape] = useState(false);
-
   return (
     <div className="space-y-2 text-[11px]">
-      {/* Colors */}
-      <section className="rounded panel">
-        <button
-          type="button"
-          onClick={() => setOpenColors((v) => !v)}
-          className="flex w-full items-center justify-between px-3 py-2"
-        >
-          <span className="font-semibold text-foreground">Colors</span>
-          <span className="text-muted">{openColors ? "−" : "+"}</span>
-        </button>
-        {openColors && (
+      <div className="grid gap-2 lg:grid-cols-2">
+        {/* Colors */}
+        <section className="rounded panel">
+          <div className="flex w-full items-center justify-between px-3 py-2">
+            <span className="font-semibold text-foreground">Colors</span>
+          </div>
           <div className="divider-top px-3 py-2 space-y-2">
             <div className="flex items-center justify-between gap-2">
               <span className="text-muted-foreground">Foreground</span>
@@ -70,20 +61,13 @@ const QRCustomizer: React.FC<QRCustomizerProps> = ({
               Transparent background
             </label>
           </div>
-        )}
-      </section>
+        </section>
 
-      {/* Logo upload */}
-      <section className="rounded panel">
-        <button
-          type="button"
-          onClick={() => setOpenLogo((v) => !v)}
-          className="flex w-full items-center justify-between px-3 py-2"
-        >
-          <span className="font-semibold text-foreground">Logo</span>
-          <span className="text-muted">{openLogo ? "−" : "+"}</span>
-        </button>
-        {openLogo && (
+        {/* Logo upload */}
+        <section className="rounded panel">
+          <div className="flex w-full items-center justify-between px-3 py-2">
+            <span className="font-semibold text-foreground">Logo</span>
+          </div>
           <div className="divider-top px-3 py-2 space-y-2">
             <p className="text-[10px] text-muted">Add a centered logo. Small square logos work best.</p>
             <input
@@ -101,7 +85,7 @@ const QRCustomizer: React.FC<QRCustomizerProps> = ({
 
             {/* Remove logo button + size */}
             {style?.image && (
-              <div className="flex gap-2 items-center">
+              <div className="flex flex-wrap gap-2 items-center">
                 <button
                   type="button"
                   onClick={() => onStyleChange?.("image", null)}
@@ -109,7 +93,7 @@ const QRCustomizer: React.FC<QRCustomizerProps> = ({
                 >
                   Remove logo
                 </button>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="text-[11px] text-muted-foreground">Logo size</span>
                   <input
                     type="range"
@@ -145,121 +129,169 @@ const QRCustomizer: React.FC<QRCustomizerProps> = ({
               </div>
             )}
 
-            <p className="text-[10px] text-muted">The logo will be auto‑resized to keep the QR scannable.</p>
+            <p className="text-[10px] text-muted">The logo will be auto-resized to keep the QR scannable.</p>
           </div>
-        )}
-      </section>
+        </section>
+      </div>
 
       {/* Shape styling */}
       <section className="rounded panel">
-        <button
-          type="button"
-          onClick={() => setOpenShape((v) => !v)}
-          className="flex w-full items-center justify-between px-3 py-2"
-        >
+        <div className="flex w-full items-center justify-between px-3 py-2">
           <span className="font-semibold text-foreground">Shapes</span>
-          <span className="text-muted">{openShape ? "−" : "+"}</span>
-        </button>
-        {openShape && (
-          <div className="divider-top px-3 py-2 space-y-3">
+        </div>
+        <div className="divider-top px-3 py-2">
+          <div className="grid gap-3 lg:grid-cols-3">
             <div className="space-y-1">
               <span className="text-muted-foreground">Dot style</span>
-              <div className="flex gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
                   onClick={() => onStyleChange?.("dotsType", "square")}
-                  className={"rounded border border-input px-2 py-1" + (style?.dotsType === "square" ? " bg-primary text-primary-foreground" : "")}
+                  className={[
+                    "flex items-center gap-2 rounded border border-input px-2 py-2 text-[11px]",
+                    "hover:opacity-90",
+                    style?.dotsType === "square" ? "bg-primary text-primary-foreground" : "bg-transparent",
+                  ].join(" ")}
                 >
+                  <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+                    <rect x="3" y="3" width="6" height="6" fill="currentColor" />
+                    <rect x="13" y="3" width="6" height="6" fill="currentColor" />
+                    <rect x="3" y="13" width="6" height="6" fill="currentColor" />
+                    <rect x="13" y="13" width="6" height="6" fill="currentColor" />
+                  </svg>
                   Square
                 </button>
                 <button
                   type="button"
                   onClick={() => onStyleChange?.("dotsType", "rounded")}
-                  className={"rounded border border-input px-2 py-1" + (style?.dotsType === "rounded" ? " bg-primary text-primary-foreground" : "")}
+                  className={[
+                    "flex items-center gap-2 rounded border border-input px-2 py-2 text-[11px]",
+                    "hover:opacity-90",
+                    style?.dotsType === "rounded" ? "bg-primary text-primary-foreground" : "bg-transparent",
+                  ].join(" ")}
                 >
+                  <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+                    <circle cx="6" cy="6" r="3" fill="currentColor" />
+                    <circle cx="16" cy="6" r="3" fill="currentColor" />
+                    <circle cx="6" cy="16" r="3" fill="currentColor" />
+                    <circle cx="16" cy="16" r="3" fill="currentColor" />
+                  </svg>
                   Rounded
                 </button>
               </div>
             </div>
             <div className="space-y-1">
-              <span className="text-muted-foreground">Corner style</span>
-              <div className="flex gap-2">
+              <span className="text-muted-foreground">Corner Radius</span>
+              <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
                   onClick={() => onStyleChange?.("cornerType", "sharp")}
-                  className={"rounded border border-input px-2 py-1" + (style?.cornerType === "sharp" ? " bg-primary text-primary-foreground" : "")}
+                  className={[
+                    "flex items-center gap-2 rounded border border-input px-2 py-2 text-[11px]",
+                    "hover:opacity-90",
+                    style?.cornerType === "sharp" ? "bg-primary text-primary-foreground" : "bg-transparent",
+                  ].join(" ")}
                 >
+                  <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+                    <rect x="2.5" y="2.5" width="8" height="8" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                    <rect x="12.5" y="12.5" width="7" height="7" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                  </svg>
                   Sharp
                 </button>
                 <button
                   type="button"
                   onClick={() => onStyleChange?.("cornerType", "rounded")}
-                  className={"rounded border border-input px-2 py-1" + (style?.cornerType === "rounded" ? " bg-primary text-primary-foreground" : "")}
+                  className={[
+                    "flex items-center gap-2 rounded border border-input px-2 py-2 text-[11px]",
+                    "hover:opacity-90",
+                    style?.cornerType === "rounded" ? "bg-primary text-primary-foreground" : "bg-transparent",
+                  ].join(" ")}
                 >
+                  <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+                    <rect x="2.5" y="2.5" width="8" height="8" rx="2.2" ry="2.2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                    <rect x="12.5" y="12.5" width="7" height="7" rx="1.8" ry="1.8" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                  </svg>
                   Rounded
                 </button>
               </div>
             </div>
             <div className="space-y-1">
               <span className="text-muted-foreground">Eye shape</span>
-              <div className="flex gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
                   onClick={() => onStyleChange?.("eyeType", "classic")}
-                  className={"rounded border border-input px-2 py-1" + (style?.eyeType === "classic" ? " bg-primary text-primary-foreground" : "")}
+                  className={[
+                    "flex items-center gap-2 rounded border border-input px-2 py-2 text-[11px]",
+                    "hover:opacity-90",
+                    style?.eyeType === "classic" ? "bg-primary text-primary-foreground" : "bg-transparent",
+                  ].join(" ")}
                 >
+                  <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+                    <rect x="2.5" y="2.5" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                    <rect x="7" y="7" width="8" height="8" fill="currentColor" />
+                  </svg>
                   Classic
                 </button>
                 <button
                   type="button"
                   onClick={() => onStyleChange?.("eyeType", "rounded")}
-                  className={"rounded border border-input px-2 py-1" + (style?.eyeType === "rounded" ? " bg-primary text-primary-foreground" : "")}
+                  className={[
+                    "flex items-center gap-2 rounded border border-input px-2 py-2 text-[11px]",
+                    "hover:opacity-90",
+                    style?.eyeType === "rounded" ? "bg-primary text-primary-foreground" : "bg-transparent",
+                  ].join(" ")}
                 >
+                  <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+                    <rect x="2.5" y="2.5" width="17" height="17" rx="2.4" ry="2.4" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                    <rect x="7" y="7" width="8" height="8" rx="1.6" ry="1.6" fill="currentColor" />
+                  </svg>
                   Rounded
                 </button>
               </div>
             </div>
           </div>
-        )}
+        </div>
       </section>
 
       {/* Size control (affects export size) */}
       <section className="panel p-3 space-y-2">
-        <div className="flex items-center justify-between">
-          <span className="font-semibold text-foreground">Size</span>
-          <span className="text-[11px] text-muted">{size}px</span>
-        </div>
-        <input
-          type="range"
-          min={256}
-          max={2000}
-          value={size}
-          onChange={(e) => onSizeChange(Number(e.target.value))}
-          className="w-full"
-        />
-        <div className="flex items-center gap-2">
-          <input
-            type="number"
-            min={256}
-            max={2000}
-            value={size}
-            onChange={(e) =>
-              onSizeChange(
-                Math.min(2000, Math.max(256, Number(e.target.value) || 256))
-              )
-            }
-            className="w-20 input text-[11px]"
-          />
-          <span className="text-[11px] text-muted">px</span>
-        </div>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="font-semibold text-foreground">Size</span>
+              <span className="text-[11px] text-muted">{size}px</span>
+            </div>
+            <input
+              type="range"
+              min={256}
+              max={2000}
+              value={size}
+              onChange={(e) => onSizeChange(Number(e.target.value))}
+              className="w-full"
+            />
+            <div className="flex items-center gap-2">
+              <input
+                type="number"
+                min={256}
+                max={2000}
+                value={size}
+                onChange={(e) =>
+                  onSizeChange(
+                    Math.min(2000, Math.max(256, Number(e.target.value) || 256))
+                  )
+                }
+                className="w-20 input text-[11px]"
+              />
+              <span className="text-[11px] text-muted">px</span>
+            </div>
+          </div>
 
-        {/* Margin control for padding around the QR */}
-        <div className="mt-3 space-y-1">
+          <div className="space-y-2">
             <label className="flex items-center justify-between text-[11px] text-muted-foreground">
-            <span>Margin</span>
-            <span className="text-[10px] text-muted">{style?.margin ?? 10}px</span>
-          </label>
-          <div className="flex items-center gap-2">
+              <span>Margin</span>
+              <span className="text-[10px] text-muted">{style?.margin ?? 10}px</span>
+            </label>
             <input
               type="range"
               min={0}
@@ -268,14 +300,17 @@ const QRCustomizer: React.FC<QRCustomizerProps> = ({
               onChange={(e) => onStyleChange?.("margin", Number(e.target.value))}
               className="w-full"
             />
-            <input
-              type="number"
-              min={0}
-              max={200}
-              value={style?.margin ?? 10}
-              onChange={(e) => onStyleChange?.("margin", Math.max(0, Number(e.target.value) || 0))}
-              className="w-20 input text-[11px]"
-            />
+            <div className="flex items-center gap-2">
+              <input
+                type="number"
+                min={0}
+                max={200}
+                value={style?.margin ?? 10}
+                onChange={(e) => onStyleChange?.("margin", Math.max(0, Number(e.target.value) || 0))}
+                className="w-20 input text-[11px]"
+              />
+              <span className="text-[11px] text-muted">px</span>
+            </div>
           </div>
         </div>
       </section>

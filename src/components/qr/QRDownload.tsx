@@ -80,34 +80,48 @@ const QRDownload: React.FC<QRDownloadProps> = ({
       await new Promise((res) => setTimeout(res, 60));
 
       if (container) {
-        // prefer canvas
-        const canvas = container.querySelector("canvas") as HTMLCanvasElement | null;
-        if (canvas) {
-          blob = await new Promise<Blob | null>((resolve) => {
-            try {
-              canvas.toBlob((b) => {
-                if (b) return resolve(b);
-                try {
-                  // fallback to dataURL conversion
-                  const dataUrl = canvas.toDataURL(`image/${settings.format === "jpeg" ? "jpeg" : "png"}`);
-                  const parts = dataUrl.split(",");
-                  const mimeMatch = parts[0].match(/:(.*?);/);
-                  const mime = mimeMatch?.[1] ?? "image/png";
-                  const bstr = atob(parts[1]);
-                  let n = bstr.length;
-                  const u8 = new Uint8Array(n);
-                  while (n--) u8[n] = bstr.charCodeAt(n);
-                  resolve(new Blob([u8], { type: mime }));
-                } catch {
-                  resolve(null);
-                }
-              });
-            } catch {
-              resolve(null);
-            }
-          });
+        const wantSvg = settings.format === "svg";
+
+        // If SVG selected, prefer SVG element to avoid saving PNG data with .svg extension.
+        if (wantSvg) {
+          const svg = container.querySelector("svg") as SVGElement | null;
+          if (svg) {
+            const svgString = new XMLSerializer().serializeToString(svg);
+            blob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+          }
         }
 
+        // For PNG/JPEG (or if SVG not found), fall back to canvas.
+        if (!blob && !wantSvg) {
+          const canvas = container.querySelector("canvas") as HTMLCanvasElement | null;
+          if (canvas) {
+            blob = await new Promise<Blob | null>((resolve) => {
+              try {
+                canvas.toBlob((b) => {
+                  if (b) return resolve(b);
+                  try {
+                    // fallback to dataURL conversion
+                    const dataUrl = canvas.toDataURL(`image/${settings.format === "jpeg" ? "jpeg" : "png"}`);
+                    const parts = dataUrl.split(",");
+                    const mimeMatch = parts[0].match(/:(.*?);/);
+                    const mime = mimeMatch?.[1] ?? "image/png";
+                    const bstr = atob(parts[1]);
+                    let n = bstr.length;
+                    const u8 = new Uint8Array(n);
+                    while (n--) u8[n] = bstr.charCodeAt(n);
+                    resolve(new Blob([u8], { type: mime }));
+                  } catch {
+                    resolve(null);
+                  }
+                });
+              } catch {
+                resolve(null);
+              }
+            });
+          }
+        }
+
+        // As a last resort, capture SVG even if PNG/JPEG was requested.
         if (!blob) {
           const svg = container.querySelector("svg") as SVGElement | null;
           if (svg) {
