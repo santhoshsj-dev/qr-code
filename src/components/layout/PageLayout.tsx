@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 
+
 // App shell: header → main content → footer.
 // Wraps a max-width container and responsive grid (page-specific).
 const PageLayout: React.FC = () => {
@@ -19,6 +20,7 @@ const PageLayout: React.FC = () => {
 
       {/* Minimal footer */}
       <Footer />
+   
     </div>
   );
 };

@@ -80,7 +80,7 @@ export function useQRCodeStyling(
         cornersSquareOptions: { type: cornersType },
         cornersDotOptions: { type: eyeType },
       });
-      if (containerRef.current) instance.append(containerRef.current);
+      if (containerRef.current) instance.append?.(containerRef.current);
       return instance;
     },
     [containerRef]
