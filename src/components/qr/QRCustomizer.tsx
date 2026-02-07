@@ -27,8 +27,8 @@ const QRCustomizer: React.FC<QRCustomizerProps> = ({
   onStyleChange,
 }) => {
   return (
-    <div className="space-y-2 text-[11px]">
-      <div className="grid gap-2 lg:grid-cols-2">
+    <div className="space-y-4 text-[11px]">
+      <div className="grid gap-4 lg:grid-cols-2">
         {/* Colors */}
         <section className="rounded panel">
           <div className="flex w-full items-center justify-between px-3 py-2">
@@ -143,7 +143,7 @@ const QRCustomizer: React.FC<QRCustomizerProps> = ({
           <div className="grid gap-3 lg:grid-cols-3">
             <div className="space-y-1">
               <span className="text-muted-foreground">Dot style</span>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2 mt-2">
                 <button
                   type="button"
                   onClick={() => onStyleChange?.("dotsType", "square")}
@@ -182,7 +182,7 @@ const QRCustomizer: React.FC<QRCustomizerProps> = ({
             </div>
             <div className="space-y-1">
               <span className="text-muted-foreground">Corner Radius</span>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2 mt-2">
                 <button
                   type="button"
                   onClick={() => onStyleChange?.("cornerType", "sharp")}
@@ -217,7 +217,7 @@ const QRCustomizer: React.FC<QRCustomizerProps> = ({
             </div>
             <div className="space-y-1">
               <span className="text-muted-foreground">Eye shape</span>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2 mt-2">
                 <button
                   type="button"
                   onClick={() => onStyleChange?.("eyeType", "classic")}

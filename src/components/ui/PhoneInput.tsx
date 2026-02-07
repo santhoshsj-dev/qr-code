@@ -22,7 +22,6 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
     },
     ref
   ) => {
-    const [isTouched, setIsTouched] = useState(false);
     const [isValid, setIsValid] = useState(true);
 
     const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,38 +32,24 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
       onChange?.(e);
     };
 
-    const handleBlur = () => {
-      setIsTouched(true);
-    };
-
-    const inputClasses = cn(
-      "flex items-center gap-2 relative bg-transparent transition-colors text-base rounded-md border pl-3 h-9 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed md:text-sm has-[input:focus]:outline-none has-[input:focus]:ring-1 has-[input:focus]:ring-ring [interpolate-size:allow-keywords]",
-      isTouched && !isValid && "border-destructive",
-      !isTouched && "border-input",
-      className
-    );
-
     return (
-      <div className={inputClasses}>
-        <input
-          ref={ref}
+      <div>
+         <input
+              ref={ref}
           value={value}
           onChange={handlePhoneChange}
-          onBlur={handleBlur}
           placeholder={placeholder || "+1234567890"}
           type="tel"
           autoComplete="tel"
           name="phone"
           aria-invalid={!isValid}
-          className={cn(
-            "flex w-full border-none bg-transparent text-base transition-colors placeholder:text-muted-foreground outline-none h-9 py-1 p-0 leading-none md:text-sm [interpolate-size:allow-keywords]",
-            className
-          )}
-          {...props}
-        />
-        {!isValid && isTouched && (
-          <p className="absolute -bottom-5 left-0 text-[10px] text-destructive">Invalid phone number</p>
-        )}
+              className={cn(
+                "mt-1 bg-input/20 dark:bg-input/30 border-input focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 h-7 rounded-md border px-2 py-0.5 text-sm transition-colors file:h-6 file:text-xs/relaxed file:font-medium focus-visible:ring-[2px] aria-invalid:ring-[2px] md:text-xs/relaxed file:text-foreground placeholder:text-muted-foreground w-full min-w-0 outline-none file:inline-flex file:border-0 file:bg-transparent disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+                className
+              )}
+              {...props}
+            />
+
       </div>
     );
   }

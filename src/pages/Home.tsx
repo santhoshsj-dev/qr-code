@@ -13,9 +13,7 @@ export type QRType =
   | "text"
   | "email"
   | "phone"
-  | "vcard"
-  | "whatsapp"
-  | "social";
+  | "whatsapp";
 
 // Basic shape of current QR config in page state.
 // In the real app, you'll likely centralize this in a hook/context.
@@ -47,7 +45,7 @@ const Home: React.FC = () => {
     style: {
       dotsColor: "#000000",
       backgroundColor: "#ffffff",
-      dotsType: "rounded",
+      dotsType: "square",
       image: null,
       imageSize: 20,
       cornerType: "sharp",
@@ -174,7 +172,7 @@ const Home: React.FC = () => {
       </div>
 
       {/* Responsive grid: left = controls, right = preview */}
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         {/* Left: Inputs & customization */}
         <section className="space-y-4">
           {/* 1. Type selector (tabs) */}

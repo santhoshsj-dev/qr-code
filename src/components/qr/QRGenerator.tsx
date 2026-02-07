@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import type { QRType } from "../../pages/Home";
 import PhoneInput from "../ui/PhoneInput";
 
-
-
 interface QRGeneratorProps {
   type: QRType;
   data: Record<string, string>;
@@ -37,7 +35,9 @@ const Field: React.FC<FieldProps> = ({
     <div className="space-y-1">
       <label className="flex items-center justify-between text-[11px] text-muted-foreground">
         <span>{label}</span>
-        {required && <span className="text-[10px] text-destructive">Required</span>}
+        {required && (
+          <span className="text-[10px] text-destructive">Required</span>
+        )}
       </label>
       <input
         type={type}
@@ -47,9 +47,7 @@ const Field: React.FC<FieldProps> = ({
         onChange={(e) => onChange(name, e.target.value)}
         className="w-full input px-2 py-1 text-[11px] placeholder:text-muted focus:outline-none"
       />
-      {helper && (
-        <p className="text-[10px] text-muted">{helper}</p>
-      )}
+      {helper && <p className="text-[10px] text-muted">{helper}</p>}
     </div>
   );
 };
@@ -79,7 +77,10 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
           });
         }
       } catch {
-        setErrors((e) => ({ ...e, url: "Enter a valid URL (include https://)" }));
+        setErrors((e) => ({
+          ...e,
+          url: "Enter a valid URL (include https://)",
+        }));
       }
     }
 
@@ -119,7 +120,9 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
           type="url"
           onChange={handleFieldChange}
         />
-        {errors.url && <p className="text-[10px] text-destructive">{errors.url}</p>}
+        {errors.url && (
+          <p className="text-[10px] text-destructive">{errors.url}</p>
+        )}
       </div>
     );
   }
@@ -127,11 +130,13 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
   if (type === "text") {
     return (
       <div className="space-y-2">
-        <label className="text-[11px] text-muted-foreground">Text content</label>
+        <label className="text-[11px] text-muted-foreground">
+          Text content
+        </label>
         <textarea
           name="text"
           value={data.text || ""}
-          placeholder="Any text, note, or message…"
+          placeholder="Any text, note, or message..."
           onChange={(e) => onChangeField("text", e.target.value)}
           rows={4}
           className="w-full resize-y input text-[11px] placeholder:text-muted-foreground focus:outline-none"
@@ -155,7 +160,9 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
           type="email"
           onChange={handleFieldChange}
         />
-        {errors.email && <p className="text-[10px] text-destructive">{errors.email}</p>}
+        {errors.email && (
+          <p className="text-[10px] text-destructive">{errors.email}</p>
+        )}
         <Field
           label="Subject"
           name="subject"
@@ -170,7 +177,7 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
           <textarea
             name="body"
             value={data.body || ""}
-            placeholder="Pre-fill the email message…"
+            placeholder="Pre-fill the email message..."
             onChange={(e) => onChangeField("body", e.target.value)}
             rows={3}
             className="w-full input px-2 py-1 text-[11px] placeholder:text-muted focus:outline-none"
@@ -183,60 +190,17 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
   if (type === "phone") {
     return (
       <div className="space-y-2">
+        <label className="text-[11px] text-muted-foreground">
+          Enter the Phone Number (with country code)
+        </label>
         <PhoneInput
           value={data.phone}
           onChange={(e) => handleFieldChange("phone", e.target.value)}
-          placeholder="Enter phone number"
+          className="w-full input px-2 py-1 text-[11px] placeholder:text-muted focus:outline-none"
         />
-        {errors.phone && <p className="text-[10px] text-destructive">{errors.phone}</p>
-  }</div>
-    );
-  }
-
-  if (type === "vcard") {
-    return (
-      <div className="space-y-2">
-        <Field
-          label="Full name"
-          name="fullName"
-          value={data.fullName}
-          required
-          onChange={onChangeField}
-        />
-        <Field
-          label="Company"
-          name="company"
-          value={data.company}
-          onChange={onChangeField}
-        />
-        <Field
-          label="Job title"
-          name="jobTitle"
-          value={data.jobTitle}
-          onChange={onChangeField}
-        />
-        <Field
-          label="Phone"
-          name="phone"
-          value={data.phone}
-          type="tel"
-          onChange={onChangeField}
-        />
-        <Field
-          label="Email"
-          name="email"
-          value={data.email}
-          type="email"
-          onChange={onChangeField}
-        />
-        <Field
-          label="Website"
-          name="website"
-          value={data.website}
-          placeholder="https://portfolio.com"
-          type="url"
-          onChange={onChangeField}
-        />
+        {errors.phone && (
+          <p className="text-[10px] text-destructive">{errors.phone}</p>
+        )}
       </div>
     );
   }
@@ -249,69 +213,22 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
           onChange={(e) => handleFieldChange("phone", e.target.value)}
           placeholder="Enter WhatsApp number"
         />
-        {errors.phone && <p className="text-[10px] text-destructive">{errors.phone}</p>}
+        {errors.phone && (
+          <p className="text-[10px] text-destructive">{errors.phone}</p>
+        )}
         <div className="space-y-1">
-          <label className="text-[11px] text-muted-foreground">Prefilled message</label>
+          <label className="text-[11px] text-muted-foreground">
+            Prefilled message
+          </label>
           <textarea
             name="message"
             value={data.message || ""}
-            placeholder="Hi, I found you from your QR code…"
+            placeholder="Hi, I found you from your QR code..."
             onChange={(e) => onChangeField("message", e.target.value)}
             rows={3}
             className="w-full input px-2 py-1 text-[11px] placeholder:text-muted focus:outline-none"
           />
         </div>
-      </div>
-    );
-  }
-
-  // Social links – show platform selector plus username/url.
-  if (type === "social") {
-    const platform = data.platform || "instagram";
-
-    const platforms: { id: string; label: string }[] = [
-      { id: "instagram", label: "Instagram" },
-      { id: "facebook", label: "Facebook" },
-      { id: "linkedin", label: "LinkedIn" },
-      { id: "youtube", label: "YouTube" },
-    ];
-
-    return (
-      <div className="space-y-3">
-        <div className="space-y-1">
-          <label className="text-[11px] text-muted-foreground">
-            Social platform
-          </label>
-          <div className="flex flex-wrap gap-1">
-            {platforms.map((p) => {
-              const active = platform === p.id;
-              return (
-                <button
-                  key={p.id}
-                  type="button"
-                  onClick={() => onChangeField("platform", p.id)}
-                  className={[
-                    "rounded px-2.5 py-1 text-[11px]",
-                    active
-                      ? "bg-primary text-primary-foreground"
-                      : "panel hover:opacity-90",
-                  ].join(" ")}
-                >
-                  {p.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        <Field
-          label="Profile URL or handle"
-          name="handle"
-          value={data.handle}
-          placeholder="@username or full URL"
-          required
-          onChange={onChangeField}
-        />
       </div>
     );
   }

@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
           rel="noreferrer"
           className="hover:text-foreground"
         >
-          Developed with Sans.
+          Developed by Sans.
         </a>
       </div>
     </footer>

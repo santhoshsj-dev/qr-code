@@ -14,7 +14,7 @@ const Header: React.FC = () => {
             <div className="h-8 w-8 rounded-md brand-gradient" />
             <div>
               <div className="text-sm font-semibold tracking-tight">
-                Static QR Studio
+                QR Code Generator
               </div>
               <div className="text-[11px] text-muted">
                 Runs 100% in your browser

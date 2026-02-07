@@ -14,9 +14,7 @@ const QRTypeSelector: React.FC<QRTypeSelectorProps> = ({ value, onChange }) => {
     { id: "text", label: "Text" },
     { id: "email", label: "Email" },
     { id: "phone", label: "Phone" },
-    { id: "vcard", label: "vCard" },
     { id: "whatsapp", label: "WhatsApp" },
-    { id: "social", label: "Social links" },
   ];
 
   return (

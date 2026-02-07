@@ -130,38 +130,6 @@ export function useQRCodeStyling(
         }
         return full ? `https://wa.me/${full}${msg}` : "";
       }
-      case "vcard": {
-        let v = "BEGIN:VCARD\\nVERSION:3.0\\n";
-        if (data.fullName) v += `FN:${data.fullName}\\n`;
-        if (data.company) v += `ORG:${data.company}\\n`;
-        if (data.jobTitle) v += `TITLE:${data.jobTitle}\\n`;
-        if (data.phone) v += `TEL:${data.phone}\\n`;
-        if (data.email) v += `EMAIL:${data.email}\\n`;
-        if (data.website) v += `URL:${data.website}\\n`;
-        v += "END:VCARD";
-        return v;
-      }
-      case "social": {
-        const platform = data.platform || "instagram";
-        const handle = (data.handle || "").trim();
-        if (!handle) return "";
-        if (/^https?:\/\//.test(handle)) return handle;
-        const username = handle.replace(/^@/, "");
-        switch (platform) {
-          case "instagram":
-            return `https://instagram.com/${username}`;
-          case "facebook":
-            return `https://facebook.com/${username}`;
-          case "linkedin":
-            return `https://linkedin.com/in/${username}`;
-          case "youtube":
-            return username.startsWith("@") || handle.startsWith("@")
-              ? `https://www.youtube.com/@${username}`
-              : `https://www.youtube.com/${username}`;
-          default:
-            return username;
-        }
-      }
       default:
         return "";
     }
