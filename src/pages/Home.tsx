@@ -8,12 +8,7 @@ import QRDownload from "../components/qr/QRDownload";
 import BulkModal from "../components/bulk/BulkModal";
 
 // Enum for QR content types.
-export type QRType =
-  | "url"
-  | "text"
-  | "email"
-  | "phone"
-  | "whatsapp";
+export type QRType = "url" | "text" | "email" | "phone" | "whatsapp";
 
 // Basic shape of current QR config in page state.
 // In the real app, you'll likely centralize this in a hook/context.
@@ -107,7 +102,7 @@ const Home: React.FC = () => {
   };
 
   const isEmpty = Object.values(settings.data).every(
-    (value) => value?.trim?.() === ""
+    (value) => value?.trim?.() === "",
   );
 
   // Basic validation rules per type. Returns true if invalid.
@@ -122,7 +117,7 @@ const Home: React.FC = () => {
         try {
           new URL(url);
           return false;
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {
           return true;
         }
@@ -172,32 +167,8 @@ const Home: React.FC = () => {
       </div>
 
       {/* Responsive grid: left = controls, right = preview */}
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
         {/* Left: Inputs & customization */}
-        <section className="space-y-4">
-          {/* 1. Type selector (tabs) */}
-          <QRTypeSelector
-            value={settings.type}
-            onChange={handleTypeChange}
-          />
-
-          {/* 2. Dynamic input forms per type */}
-          <div className="panel space-y-3">
-            <QRGenerator
-              type={settings.type}
-              data={settings.data}
-              onChangeField={handleDataChange}
-            />
-          </div>
-
-          {/* 3. Customization collapsible panel */}
-          <QRCustomizer
-            size={settings.size}
-            onSizeChange={handleSizeChange}
-            style={settings.style}
-            onStyleChange={handleStyleChange}
-          />
-        </section>
 
         {/* Right: Preview & download */}
         <section className="space-y-4">
@@ -214,6 +185,28 @@ const Home: React.FC = () => {
             disabled={isEmpty || isInvalid}
             onFormatChange={handleFormatChange}
             qrInstanceRef={qrInstanceRef}
+          />
+        </section>
+
+        <section className="space-y-4">
+          {/* 1. Type selector (tabs) */}
+          <QRTypeSelector value={settings.type} onChange={handleTypeChange} />
+
+          {/* 2. Dynamic input forms per type */}
+          <div className="panel space-y-3">
+            <QRGenerator
+              type={settings.type}
+              data={settings.data}
+              onChangeField={handleDataChange}
+            />
+          </div>
+
+          {/* 3. Customization collapsible panel */}
+          <QRCustomizer
+            size={settings.size}
+            onSizeChange={handleSizeChange}
+            style={settings.style}
+            onStyleChange={handleStyleChange}
           />
         </section>
       </div>

@@ -11,7 +11,9 @@ const Header: React.FC = () => {
         {/* Left: logo + tagline */}
         <div className="flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-md brand-gradient" />
+            <div className="h-8 w-8 ">
+             <img src="/src/assets/saas-logo.svg" alt="QR Icon" className="h-full w-full object-cover rounded-md" />
+              </div>
             <div>
               <div className="text-sm font-semibold tracking-tight">
                 QR Code Generator
@@ -43,7 +45,7 @@ const Header: React.FC = () => {
           <ThemeToggle />
 
           {/* Privacy tooltip - later replace with a real tooltip component */}
-          <div className="relative group">
+          <div className="relative group hidden sm:inline-flex">
             <button
               aria-label="Privacy info"
               className="h-7 w-7 rounded-full btn-ghost flex items-center justify-center"

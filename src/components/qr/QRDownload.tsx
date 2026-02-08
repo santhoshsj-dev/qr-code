@@ -245,7 +245,7 @@ const QRDownload: React.FC<QRDownloadProps> = ({
         type="button"
         disabled={disabled}
         onClick={handleDownload}
-        className="mb-2 inline-flex w-full items-center justify-center rounded bg-primary px-3 py-1.5 text-[11px] font-semibold text-primary-foreground disabled:cursor-not-allowed disabled:opacity-60"
+        className="mb-2 inline-flex w-full items-center justify-center rounded bg-primary px-3 py-4 text-[11px] font-semibold text-primary-foreground disabled:cursor-not-allowed disabled:opacity-60"
       >
         Download QR
       </button>
