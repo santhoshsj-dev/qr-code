@@ -12,7 +12,7 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2">
             <div className="h-8 w-8 ">
-             <img src="/src/assets/saas-logo.svg" alt="QR Icon" className="h-full w-full object-cover rounded-md" />
+             <img src="/saas-logo.svg" alt="QR Icon" className="h-full w-full object-cover rounded-md" />
               </div>
             <div>
               <div className="text-sm font-semibold tracking-tight">

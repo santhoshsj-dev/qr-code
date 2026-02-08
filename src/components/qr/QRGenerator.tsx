@@ -190,7 +190,7 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
   if (type === "phone") {
     return (
       <div className="space-y-2">
-        <label className="text-[11px] text-muted-foreground">
+        <label className="text-[10px] text-muted-foreground">
           Enter the Phone Number (with country code)
         </label>
         <PhoneInput
@@ -208,10 +208,14 @@ const QRGenerator: React.FC<QRGeneratorProps> = ({
   if (type === "whatsapp") {
     return (
       <div className="space-y-2">
+        <label className="text-[10px] text-muted-foreground">
+          Enter the Phone Number (with country code)
+        </label>
         <PhoneInput
           value={data.phone}
           onChange={(e) => handleFieldChange("phone", e.target.value)}
           placeholder="Enter WhatsApp number"
+          className="w-full input px-2 py-1 text-[11px] placeholder:text-muted focus:outline-none"
         />
         {errors.phone && (
           <p className="text-[10px] text-destructive">{errors.phone}</p>
